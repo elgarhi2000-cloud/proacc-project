@@ -11,14 +11,24 @@ services:
       - key: PORT
         value: "3000"
       - key: DB_SERVER
-        value: "185.182.187.112"
+        fromService:
+          name: proaccdb-app
+          envVarKey: DB_SERVER
       - key: DB_DATABASE
-        value: "ProACCDB"
+        fromService:
+          name: proaccdb-app
+          envVarKey: DB_DATABASE
       - key: DB_USER
-        value: "proacc"
+        fromService:
+          name: proaccdb-app
+          envVarKey: DB_USER
       - key: DB_PASSWORD
-        value: "proacc123"
+        fromService:
+          name: proaccdb-app
+          envVarKey: DB_PASSWORD
       - key: DB_INSTANCE
-        value: "SQLEXPRESS"
+        fromService:
+          name: proaccdb-app
+          envVarKey: DB_INSTANCE
       - key: DB_ENCRYPT
-        value: "false"
+        value: "true"

@@ -2,11 +2,18 @@ const sql = require('mssql');
 
 let pool;
 
+const requiredEnv = ['DB_SERVER', 'DB_DATABASE', 'DB_USER', 'DB_PASSWORD'];
+for (const key of requiredEnv) {
+  if (!process.env[key]) {
+    throw new Error(`Missing required environment variable: ${key}`);
+  }
+}
+
 const config = {
-  server: process.env.DB_SERVER || '185.182.187.112',
-  database: process.env.DB_DATABASE || 'ProACCDB',
-  user: process.env.DB_USER || 'proacc',
-  password: process.env.DB_PASSWORD || 'proacc123',
+  server: process.env.DB_SERVER,
+  database: process.env.DB_DATABASE,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   options: {
     encrypt: (process.env.DB_ENCRYPT === 'true'),
     enableArithAbort: true

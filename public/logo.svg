@@ -1,0 +1,27 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="80" height="80" rx="12" fill="#0ea5e9" opacity="0.1"/>
+  
+  <!-- Ledger/Account Book icon -->
+  <g transform="translate(20, 15)">
+    <!-- Left page -->
+    <path d="M 5 5 L 5 35 Q 5 37 7 37 L 18 37 Q 20 37 20 35 L 20 5 Q 20 3 18 3 L 7 3 Q 5 3 5 5 Z" 
+          fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Right page -->
+    <path d="M 20 5 L 20 35 Q 20 37 22 37 L 33 37 Q 35 37 35 35 L 35 5 Q 35 3 33 3 L 22 3 Q 20 3 20 5 Z" 
+          fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Lines for text -->
+    <line x1="8" y1="10" x2="17" y2="10" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="8" y1="16" x2="17" y2="16" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="8" y1="22" x2="17" y2="22" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round"/>
+    
+    <line x1="23" y1="10" x2="32" y2="10" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="23" y1="16" x2="32" y2="16" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="23" y1="22" x2="32" y2="22" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round"/>
+    
+    <!-- Dollar sign overlay -->
+    <text x="25" y="34" font-size="18" font-weight="bold" fill="#0ea5e9" text-anchor="middle">$</text>
+  </g>
+</svg>

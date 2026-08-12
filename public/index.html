@@ -3,21 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ProACCDB — قوائم الجداول</title>
+  <title>النظام المحاسبي - ProACC</title>
+  <link rel="icon" type="image/x-icon" href="/Icon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <div class="app">
     <aside class="sidebar" id="sidebar">
       <div class="logo">
-        <div class="logo-mark">P</div>
-        <div class="logo-text" id="logo-text">ProACC</div>
+        <div class="logo-image">
+          <img src="/logo.svg" alt="شعار النظام" class="logo-icon" />
+        </div>
+        <div class="logo-text-wrapper">
+          <div class="logo-title">النظام المحاسبي</div>
+          <div class="logo-subtitle" id="logo-text">ProACC</div>
+        </div>
       </div>
       <nav class="nav">
-        <a class="nav-item active" href="#" data-route="dashboard"><span class="icon">📈</span><span class="label">اللوحة</span></a>
-        <a class="nav-item" href="#" data-route="tables"><span class="icon">📄</span><span class="label">الجداول</span></a>
-        <a class="nav-item" href="#" data-route="reports"><span class="icon">📊</span><span class="label">التقارير</span></a>
-        <a class="nav-item" href="#" data-route="accounts"><span class="icon">💳</span><span class="label">دليل الحسابات</span></a>
+        <a class="nav-item active" href="#" data-route="dashboard"><i class="fas fa-chart-line"></i><span class="label">اللوحة</span></a>
+        <a class="nav-item" href="#" data-route="tables"><i class="fas fa-table"></i><span class="label">الجداول</span></a>
+        <a class="nav-item" href="#" data-route="reports"><i class="fas fa-chart-bar"></i><span class="label">التقارير</span></a>
+        <a class="nav-item" href="#" data-route="accounts"><i class="fas fa-credit-card"></i><span class="label">دليل الحسابات</span></a>
       </nav>
       <div class="sidebar-footer">نسخة تجريبية</div>
     </aside>
@@ -25,18 +32,22 @@
     <div class="content">
       <header class="topbar">
         <div class="topbar-left">
-          <button id="toggle-sidebar" class="icon-btn" title="طي/توسيع الشريط">☰</button>
+          <button id="toggle-sidebar" class="icon-btn" title="طي/توسيع الشريط"><i class="fas fa-bars"></i></button>
           <h1>قائمة الجداول</h1>
         </div>
         <div class="topbar-right">
-          <input id="search" placeholder="ابحث باسم الجدول..." />
-          <button id="refresh" title="تحديث">⟳</button>
-          <div class="user" id="user-area">المستخدم</div>
+          <div class="topbar-search">
+            <i class="fas fa-search"></i>
+            <input id="search" placeholder="ابحث باسم الجدول..." />
+          </div>
+          <button id="refresh" title="تحديث" class="icon-btn"><i class="fas fa-sync-alt"></i></button>
+          <div class="user" id="user-area"><i class="fas fa-user-circle"></i><span>المستخدم</span></div>
         </div>
       </header>
 
       <main class="main-area">
         <div class="card">
+          <h2><i class="fas fa-database"></i> قائمة الجداول</h2>
           <div id="status">جارٍ التحميل…</div>
           <div class="table-wrap">
             <table id="tables">
@@ -47,8 +58,8 @@
         </div>
 
         <div id="accounts-card" class="card" style="display:none">
-          <h2>دليل الحسابات</h2>
-          <div class="accounts-actions"><button id="add-account">إضافة حساب</button></div>
+          <h2><i class="fas fa-book"></i> دليل الحسابات</h2>
+          <div class="accounts-actions"><button id="add-account"><i class="fas fa-plus-circle"></i> إضافة حساب</button></div>
           <div id="accounts-status">جارٍ التحميل…</div>
           <div class="table-wrap">
             <table id="accounts-table">
@@ -59,7 +70,7 @@
         </div>
 
         <section id="details" class="card" aria-live="polite">
-          <h2 id="details-title" style="display:none">محتوى الجدول</h2>
+          <h2 id="details-title" style="display:none"><i class="fas fa-table"></i> <span id="details-title-text"></span></h2>
           <div id="details-area"></div>
         </section>
       </main>
