@@ -1,0 +1,19 @@
+{
+  "name": "proacc-sql-node",
+  "version": "0.1.0",
+  "description": "Minimal Node.js API connecting to SQL Server (ProACCDB)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mssql": "*"
+  },
+  "devDependencies": {
+    "localtunnel": "^2.0.2",
+    "nodemon": "^2.0.22"
+  }
+}
