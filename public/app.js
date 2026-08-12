@@ -5,9 +5,7 @@ async function loadTables() {
     status.textContent = 'جلب الجداول...';
     const auth = JSON.parse(localStorage.getItem('proacc_auth') || 'null');
     const headers = auth && auth.token ? { 'Authorization': 'Bearer ' + auth.token } : {};
-    const res = await fetch('/tables', { headers });
-    if (!res.ok) throw new Error(await res.text());
-    const data = await res.json();
+    const data = await fetchJson('/tables', { headers });
     tbody.innerHTML = '';
     data.tables.forEach(t => {
       const tr = document.createElement('tr');
@@ -20,6 +18,22 @@ async function loadTables() {
   }
 }
 
+async function fetchJson(url, options = {}) {
+  const res = await fetch(url, options);
+  const text = await res.text();
+  if (!res.ok) {
+    let errorMessage = res.statusText || 'خطأ في الاتصال';
+    try {
+      const parsed = JSON.parse(text);
+      errorMessage = parsed.error || parsed.message || errorMessage;
+    } catch (e) {
+      if (text) errorMessage = text;
+    }
+    throw new Error(errorMessage);
+  }
+  return text ? JSON.parse(text) : {};
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   // apply persisted UI state
   const state = JSON.parse(localStorage.getItem('proacc_ui') || '{}');
@@ -30,8 +44,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const lt = document.getElementById('logo-text');
     if (lt) lt.textContent = state.logoText;
   }
-
-  loadTables();
 
   // show login if needed
   const auth = JSON.parse(localStorage.getItem('proacc_auth') || 'null');
@@ -186,9 +198,7 @@ async function showTableDetails(schema, table) {
   try {
     const auth = JSON.parse(localStorage.getItem('proacc_auth') || 'null');
     const headers = auth && auth.token ? { 'Authorization': 'Bearer ' + auth.token } : {};
-    const res = await fetch(`/table/${schema}/${table}`, { headers });
-    if (!res.ok) throw new Error(await res.text());
-    const data = await res.json();
+    const data = await fetchJson(`/table/${schema}/${table}`, { headers });
     if (!data.rows || data.rows.length === 0) {
       area.textContent = 'لا توجد صفوف لعرضها.';
       return;
@@ -246,9 +256,7 @@ async function loadAccounts() {
     status.textContent = 'جلب دليل الحسابات...';
     const auth = JSON.parse(localStorage.getItem('proacc_auth') || 'null');
     const headers = auth && auth.token ? { 'Authorization': 'Bearer ' + auth.token } : {};
-    const res = await fetch('/accounts', { headers });
-    if (!res.ok) throw new Error(await res.text());
-    const data = await res.json();
+    const data = await fetchJson('/accounts', { headers });
     if (!data.accounts || data.accounts.length === 0) {
       status.textContent = 'لا توجد حسابات.';
       tbody.innerHTML = '';
@@ -269,8 +277,8 @@ async function loadAccounts() {
       cols.forEach(c => { const td = document.createElement('td'); const v = row[c]; td.textContent = v === null ? 'NULL' : v.toString(); tr.appendChild(td); });
       // actions
       const actTd = document.createElement('td');
-      const editBtn = document.createElement('button'); editBtn.textContent = 'تعديل'; editBtn.className = 'action-btn acct-edit';
-      const delBtn = document.createElement('button'); delBtn.textContent = 'حذف'; delBtn.className = 'action-btn acct-delete danger';
+      const editBtn = document.createElement('button'); editBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> تعديل'; editBtn.className = 'action-btn acct-edit';
+      const delBtn = document.createElement('button'); delBtn.innerHTML = '<i class="fa-solid fa-trash"></i> حذف'; delBtn.className = 'action-btn acct-delete danger';
       actTd.appendChild(editBtn); actTd.appendChild(delBtn);
       tr.appendChild(actTd);
       tbody.appendChild(tr);
