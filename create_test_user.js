@@ -1,12 +1,7 @@
 const db = require('./db');
 (async ()=>{
-  const username = process.env.TEST_USER;
-  const password = process.env.TEST_PASS;
-
-  if (!username || !password) {
-    throw new Error('Set TEST_USER and TEST_PASS in your environment before running this script.');
-  }
-
+  const username = process.env.TEST_USER || 'tester';
+  const password = process.env.TEST_PASS || 'Test@1234';
   try {
     console.log('Inserting test user', username);
     const q = "INSERT INTO dbo.[USER] (UserName, UserPass) VALUES (@username, @password); SELECT SCOPE_IDENTITY() AS id;";

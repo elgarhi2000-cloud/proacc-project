@@ -9,7 +9,7 @@ async function loadTables() {
     tbody.innerHTML = '';
     data.tables.forEach(t => {
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${t.TABLE_SCHEMA}</td><td>${t.TABLE_NAME}</td><td><button class="view" data-schema="${t.TABLE_SCHEMA}" data-table="${t.TABLE_NAME}"><i class="fas fa-eye"></i> عرض</button></td>`;
+      tr.innerHTML = `<td>${t.TABLE_SCHEMA}</td><td>${t.TABLE_NAME}</td><td><button class="view" data-schema="${t.TABLE_SCHEMA}" data-table="${t.TABLE_NAME}">عرض</button></td>`;
       tbody.appendChild(tr);
     });
     status.textContent = `تم التحميل: ${data.tables.length} جدولاً`;
@@ -51,10 +51,10 @@ window.addEventListener('DOMContentLoaded', () => {
   const userArea = document.getElementById('user-area');
   function setUserArea(user) {
     if (!user) {
-      userArea.innerHTML = '<i class="fas fa-user"></i> <span>المستخدم</span>';
+      userArea.innerHTML = 'المستخدم';
       return;
     }
-    userArea.innerHTML = `<i class="fas fa-user-circle"></i> <span>${user.fullName || user.username}</span> <button id="logout-btn" class="icon-btn" title="خروج"><i class="fas fa-sign-out-alt"></i></button>`;
+    userArea.innerHTML = `${user.fullName || user.username} <button id="logout-btn" class="icon-btn" title="خروج">⎋</button>`;
     const logoutBtn = document.getElementById('logout-btn');
     logoutBtn && logoutBtn.addEventListener('click', () => {
       localStorage.removeItem('proacc_auth');
@@ -191,10 +191,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 async function showTableDetails(schema, table) {
   const title = document.getElementById('details-title');
-  const titleText = document.getElementById('details-title-text');
   const area = document.getElementById('details-area');
   title.style.display = '';
-  titleText.textContent = `محتوى ${schema}.${table}`;
+  title.textContent = `محتوى ${schema}.${table}`;
   area.textContent = 'جلب الصفوف...';
   try {
     const auth = JSON.parse(localStorage.getItem('proacc_auth') || 'null');
